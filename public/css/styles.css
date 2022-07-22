@@ -1,5 +1,4 @@
 html{
-    position: fixed;
     min-height: 100%;
 }
 .container-fluid {
@@ -25,18 +24,19 @@ html{
 }
 
 .footer {
-	position: absolute;
+    position: absolute;
 	text-align: center;
 	bottom: 0;
 	width: 100%;
 	height: 60px;
 	background-color: #1abc9c;
+    position: fixed;
 }
 
 .footer p {
-	margin-top: 25px;
+    margin-top: 25px;
 	font-size: 12px;
-  color: #fff;
+    color: #fff;
 }
 .compose-form{
     display: flex;
