@@ -63,13 +63,20 @@ app.get("/compose", (req, res)=>{
 });
 
 app.get("/posts/:blogName", (req, res)=>{
-  let blogName = _.lowerCase(req.params.blogName);
-  const index = posts.findIndex((post)=>post.title == blogName);
-  const storedTitle = posts[index].title;
-  console.log(storedTitle);
-  console.log(blogName);
-  if(blogName === storedTitle)
-  res.render("post", {post: posts[index]});
+  let blogId = req.params.blogName;
+  console.log(blogId);
+  Blog.findById(blogId, function(err, foundBlog){
+    if(!err){
+      console.log(foundBlog.name);
+      res.render("post", {post: foundBlog});
+    }
+  });
+  // const index = posts.findIndex((post)=>post.title == blogName);
+  // const storedTitle = posts[index].title;
+  // console.log(storedTitle);
+  // console.log(blogName);
+  // if(blogName === storedTitle)
+  //   res.render("post", {post: posts[index]});
   
 
 });
@@ -80,9 +87,12 @@ app.post("/compose", (req, res)=>{
     name: req.body.newBlogTitle,
     content: req.body.newBlogBody
   });
-  post.save();
+  post.save(function(err){
+    if (!err){
+      res.redirect("/");
+    }
+  });
 
-  res.redirect("/");
 });
 
 // PORT DECLARATION
